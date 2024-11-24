@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CheatZ Extension</title>
+    <style>
+      html {
+        background-color: black;
+      }
+
+      :root {
+        --bg-color: #0a0a0a;
+        --text-color: #00ff00;
+        --accent-color: #00ff00;
+        --switch-off: #333;
+        --switch-on: #00ff00;
+        --separator-color: #00ff00;
+      }
+
+      body {
+        font-family: "Courier New", monospace;
+        width: 320px;
+        margin: 0;
+        overflow: hidden;
+        color: var(--text-color);
+        background-color: rgba(0, 255, 0, 0.05);
+        padding: 20px;
+        width: 320px;
+        position: relative;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        text-shadow: 0 0 5px var(--accent-color);
+        font-size: 2.5em;
+      }
+
+      .option {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        border-radius: 6px;
+        padding: 15px;
+        box-shadow: 0 4px 6px rgba(0, 255, 13, 0.1),
+          0 0 0 1px rgba(17, 255, 0, 0.1);
+        transition: all 0.3s ease;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        cursor: pointer;
+      }
+
+      .option:hover {
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2),
+          0 0 0 1px rgba(21, 255, 0, 0.2);
+      }
+
+      .option-content {
+        flex-grow: 1;
+        padding-right: 15px;
+      }
+
+      .option-text {
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+
+      .option-description {
+        font-size: 1em;
+        opacity: 0.8;
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        flex-shrink: 0;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--switch-off);
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: var(--bg-color);
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: var(--switch-on);
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      @keyframes flicker {
+        0% {
+          opacity: 0.8;
+        }
+
+        50% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0.8;
+        }
+      }
+
+      .flicker {
+        animation: flicker 2s infinite;
+      }
+
+      .scanline {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(0, 255, 0, 0.04),
+          transparent
+        );
+        pointer-events: none;
+        animation: scan 7s linear infinite;
+      }
+
+      @keyframes scan {
+        0% {
+          transform: translateY(-100%);
+        }
+
+        100% {
+          transform: translateY(100%);
+        }
+      }
+
+      .footer {
+        text-align: center;
+        font-size: 1em;
+        margin-top: 40px;
+        font-weight: 500;
+      }
+
+      .status {
+        text-align: end;
+        font-size: 12px;
+        color: var(--text-color);
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(0, 255, 4, 0.2);
+        position: relative;
+      }
+
+      .status::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #00ff00, transparent);
+      }
+
+      .active {
+        color: #0077ff;
+        font-weight: 600;
+        text-shadow: 0 0 10px rgba(0, 119, 255, 0.5);
+      }
+
+      .inactive {
+        color: #ff4545;
+        font-weight: 600;
+        text-shadow: 0 0 10px rgba(255, 69, 69, 0.5);
+      }
+
+      .footer a {
+        color: var(--text-color);
+        opacity: 1;
+        transition: color 0.3s ease;
+      }
+
+      .footer a:hover {
+        color: var(--accent-color);
+        text-shadow: 0 0 10px rgba(13, 255, 0, 0.5);
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 class="flicker glitch">CheatZ</h1>
+    <div class="option">
+      <div class="option-content">
+        <div class="option-text">Simple Allow Copy</div>
+        <div class="option-description">
+          Enable right-click and copy functionality
+        </div>
+      </div>
+      <label class="switch">
+        <input
+          type="checkbox"
+          id="copyProtection"
+          aria-label="Toggle Simple Allow Copy"
+        />
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="option">
+      <div class="option-content">
+        <div class="option-text">Always Active Mode</div>
+        <div class="option-description">
+          Keep tab appearing active in background
+        </div>
+      </div>
+      <label class="switch">
+        <input
+          type="checkbox"
+          id="alwaysActive"
+          aria-label="Toggle Always Active Mode"
+        />
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="status">
+      Status: <span id="status" class="active">Inactive</span>
+    </div>
+    <footer class="footer">
+      <p>
+        &copy; 2024 Made by
+        <a href="https://mvp-subha.me" target="_blank" rel="noopener noreferrer"
+          >Subhadeep.</a
+        >
+      </p>
+      <p>
+        <a
+          href="https://github.com/subhadeeproy3902/cheatz"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub Repository</a
+        >
+      </p>
+    </footer>
+
+    <script src="./popup.js"></script>
+  </body>
+</html>
