@@ -1,4 +1,4 @@
-<div><img src="icon_active.png" alt="icon" width="100" height="100"><h1>CheatZ - Hacks for your online exams</h1></div>
+<div><img src="icon.png" alt="icon" width="100" height="100"><h1>CheatZ - Hacks for your online exams</h1></div>
 
 ## Overview
 
